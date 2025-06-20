@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class KnihaSluzba {
 
-    private List<Kniha> knihy;
+    private final List<Kniha> knihy;
 
     public KnihaSluzba() {
         ObjectMapper objectMapper = new ObjectMapper();
@@ -20,7 +20,8 @@ public class KnihaSluzba {
                 throw new RuntimeException("Soubor knihy.json nebyl nalezen.");
             }
 
-            knihy = objectMapper.readValue(inputStream, new TypeReference<List<Kniha>>() {});
+            knihy = objectMapper.readValue(inputStream, new TypeReference<List<Kniha>>() {
+            });
         } catch (IOException e) {
             throw new RuntimeException("Chyba při načítání souboru knihy.json", e);
         }
@@ -33,15 +34,11 @@ public class KnihaSluzba {
 
     // 2. Vrátí knihy podle zadaného autora
     public List<Kniha> getKnihyOdAutora(String autor) {
-        return knihy.stream()
-                .filter(kniha -> kniha.getAutor().equalsIgnoreCase(autor))
-                .collect(Collectors.toList());
+        return knihy.stream().filter(kniha -> kniha.getAutor().equalsIgnoreCase(autor)).collect(Collectors.toList());
     }
 
     // 3. Vrátí knihy vydané v zadaném roce
     public List<Kniha> getKnihyZRoku(int rok) {
-        return knihy.stream()
-                .filter(kniha -> kniha.getRokVydani() == rok)
-                .collect(Collectors.toList());
+        return knihy.stream().filter(kniha -> kniha.getRokVydani() == rok).collect(Collectors.toList());
     }
 }

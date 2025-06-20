@@ -44,4 +44,3 @@ public class KnihaSluzbaTest {
         assertTrue(knihy.isEmpty(), "Žádná kniha z roku 2000 by neměla být");
     }
 }
-
